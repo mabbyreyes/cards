@@ -2,12 +2,18 @@ package edu.cnm.deepdive.controller;
 
 import edu.cnm.deepdive.model.Card;
 import edu.cnm.deepdive.model.Deck;
+import edu.cnm.deepdive.model.Rank;
+import edu.cnm.deepdive.model.Suit;
 import edu.cnm.deepdive.model.Suit.Color;
 import java.security.SecureRandom;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Encapsulates the trick of shuffling playing Cards. Randomly deals from two {@link Deck} with a
+ * {@link List} of cards.
+ */
 public class Trick {
 
   private Deck deck;
@@ -15,6 +21,12 @@ public class Trick {
   private List<Card> blackPile;
   private Random rng = new SecureRandom();
 
+  /**
+   * Initializes the main instance with the specified {@link #prepare()}, {@link #split()}, {@link
+   * #swap()}, {@link #report()}
+   *
+   * @param args {@link Trick} value.
+   */
   public static void main(String[] args) {
     Trick trick = new Trick();
     trick.prepare();
@@ -23,11 +35,18 @@ public class Trick {
     trick.report();
   }
 
+  /**
+   * Encapsulates the shuffle of standard playing cards.
+   */
   private void prepare() {
     deck = new Deck();
     deck.shuffle(rng);
   }
 
+  /**
+   * Encapsulates the split method by selecting a Card from the {@link #blackPile} and {@link
+   * #redPile} decks.
+   */
   private void split() {
     redPile = new LinkedList<>();
     blackPile = new LinkedList<>();
@@ -40,6 +59,9 @@ public class Trick {
     }
   }
 
+  /**
+   * Initializes the swap instance with the specified {@link #blackPile} and {@link #redPile}.
+   */
   private void swap() {
     int swapSize = rng.nextInt(1 + Math.min(blackPile.size(), redPile.size()));
     for (int i = 0; i < swapSize; i++) {
@@ -48,6 +70,9 @@ public class Trick {
     }
   }
 
+  /**
+   * Encapsulates an even amount of {@link Color} (red &amp; black) in decks and reports the number.
+   */
   private void report() {
     int redCount = 0;
     int blackCount = 0;

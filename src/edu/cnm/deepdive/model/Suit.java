@@ -32,6 +32,6 @@ public enum Suit {
    * Encapsulates the two possible colors (red &amp; black) of playing card suits.
    */
   public enum Color {
-    RED, BLACK;
+    RED, BLACK
   }
 }
