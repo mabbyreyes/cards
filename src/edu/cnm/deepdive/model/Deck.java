@@ -49,9 +49,14 @@ public class Deck {
    * @param rng {@link Random} deals a random card.
    */
   public void shuffle(Random rng) {
+    gather();
+    Collections.shuffle(cards, rng);
+  }
+
+  private void gather() {
+    // Gathers cards together in single deck.
     cards.addAll(dealt);
     dealt.clear();
-    Collections.shuffle(cards, rng);
   }
 
   /**
@@ -77,5 +82,23 @@ public class Deck {
     return cards.toString();
   }
 
+  // if true, brings them together before sorting.
+  public void sort(boolean gather) {
+    // If true, executes method.
+    if (gather) {
+      gather();
+    }
+    // Sorts collection of cards. Comparator operates on cards.
+    cards.sort((card1, card2) -> {
+      // Returns ordinal position.
+      // Returns 0 if same suit.
+      int result = card1.getSuit().compareTo(card2.getSuit());
+      // Same suit has same ordinal position.
+          if (result == 0) {
+            result = card1.getRank().compareTo(card2.getRank());
+          }
+          return result;
+    });
+  }
 }
 
