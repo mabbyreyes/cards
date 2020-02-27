@@ -13,7 +13,8 @@ import java.util.Random;
 /**
  * Encapsulates playing cards in a {@link List}.
  */
-public class Deck {
+// Comparator of cards or its subclasses.
+public class Deck implements Comparator<Card> {
 
   private List<Card> cards;
   private List<Card> dealt;
@@ -89,9 +90,15 @@ public class Deck {
     if (gather) {
       gather();
     }
+    // Implements comparator. This is comparator.
+      cards.sort(this);
+  }
+
+  @Override
+  public int compare(Card card1, Card card2) {
     // For every card, get its suit to compare. Uses comparator to compare on getsuit.
     // First compare based on suit, then if necessary, compare rank.
-    cards.sort(Comparator.comparing(Card::getSuit).thenComparing(Card::getRank));
+    return Comparator.comparing(Card::getSuit).thenComparing(Card::getRank).compare(card1, card2);
   }
 }
 
