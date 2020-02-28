@@ -83,6 +83,10 @@ public class Deck {
     return cards.toString();
   }
 
+  /**
+   * Sorts playing cards and compares themselves to each other.
+   * @return {@link Card} value.
+   */
   // if true, brings them together before sorting.
   public void sort(boolean gather) {
     // If true, executes method.
